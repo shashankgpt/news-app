@@ -1,4 +1,5 @@
 import React from 'react'
+import {Link} from 'react-router-dom'
 import {PUBLICATION_NAME} from '../../../constant/News';
 
 export default function Header() {
@@ -6,9 +7,9 @@ export default function Header() {
         <div className="news-header py-3">
         <div className="row flex-nowrap justify-content-between align-items-center">
           <div className="col-4 pt-1 text-left">
-            <a className="text-muted" href="www">
+            {/* <a className="text-muted" href="www">
               Subscribe
-            </a>
+            </a> */}
           </div>
           <div className="col-4 text-center">
             <a className="blog-header-logo text-dark" href="www">
@@ -33,9 +34,9 @@ export default function Header() {
                 <line x1="21" y1="21" x2="15.8" y2="15.8" />
               </svg>
             </a>
-            <a className="btn btn-sm btn-outline-secondary" href="www">
+            <Link className="btn btn-sm btn-outline-secondary" to='/signup'>
               Sign up
-            </a>
+            </Link>
           </div>
         </div>
       </div>

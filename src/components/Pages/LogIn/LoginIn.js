@@ -1,5 +1,6 @@
 import React from "react";
 import { useForm } from "react-hook-form";
+import {Link} from 'react-router-dom'
 import PageWrapper from "../../common/PageWrapper/PageWrapper";
 import "./login.css";
 
@@ -9,7 +10,10 @@ function SignUp() {
   console.log(errors);
   return (
     <PageWrapper>
+         <div className="jumbotron p-3 p-md-5  rounded bg-white">
+         <h1 className="display-4 font-italic">Log In</h1>
       <form className="text-left form-margin" onSubmit={handleSubmit(onSubmit)}>
+         
         <div className="form-group">
           <label htmlFor="username">
             Username
@@ -25,7 +29,7 @@ function SignUp() {
           </label>
           {errors.username && (
             <small id="usernameHelp" className="form-text text-danger">
-              Username is required
+              You must specify a username
             </small>
           )}
         </div>
@@ -56,7 +60,11 @@ function SignUp() {
         <button type="submit" className="btn btn-primary">
           Submit
         </button>
+        <Link className="mx-4" to='/signup'>
+              Sign up
+            </Link>
       </form>
+      </div>
     </PageWrapper>
   );
 }
