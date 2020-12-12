@@ -2,7 +2,7 @@ import React from "react";
 import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
 // import PropTypes from 'prop-types'
-import { signUpUser, getUserInfo } from "../../../store/actions/user.action";
+import { saveUserProfile, getUserInfo, logout } from "../../../store/actions/user.action";
 import PageWrapper from "../../common/PageWrapper/PageWrapper";
 
 function Profile() {
@@ -12,7 +12,8 @@ function Profile() {
     const { register, handleSubmit, setValue,watch, errors } = useForm();
     const password = React.useRef({});
     const onSubmit = (data) => {
-      dispatch(signUpUser(data.username, data.password));
+      const { firstName, lastName, email,gender  } = data;
+      dispatch(saveUserProfile({ firstName, lastName, email, gender}));
     };
     password.current = watch("password", "");
     console.log(errors);
@@ -28,6 +29,11 @@ function Profile() {
         }
       },[stateInfo.profile])
 
+      const logoutUser = () => {
+        window.localStorage.removeItem('token');
+        window.localStorage.removeItem('username');
+        dispatch(logout());
+      }
     return (
       <PageWrapper>
         <div className="jumbotron p-3 p-md-5  rounded bg-white">
@@ -68,15 +74,15 @@ function Profile() {
               )}
             </div>
             <div className="form-group">
-              <label htmlFor="lastname">
+              <label htmlFor="lastName">
                 First Name
                 <input
                   type="text"
                   className={`form-control ${
                     errors.username ? "is-invalid" : ""
                   }`}
-                  name="lastname"
-                  id="lastname"
+                  name="lastName"
+                  id="lastName"
                   aria-describedby="emailHelp"
                   placeholder="Enter email"
                   ref={register({ required: true })}
@@ -133,7 +139,7 @@ function Profile() {
             <button type="submit" className="btn btn-primary">
               Submit
             </button>
-            <button type="submit" className="btn btn-link">
+            <button type="button" className="btn btn-link" onClick={logoutUser}>
               Logout
             </button>
           </form>
