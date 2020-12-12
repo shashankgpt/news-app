@@ -18,6 +18,18 @@ export default function userReducer(state = initialState, action) {
         username: action.payload.username,
         token: action.payload.token,
       };
+    case userConstant.FETCH_USER_SUCCESS:
+      return {
+        ...state,
+        profile: action.payload.data.Item,
+        success:action.payload.message
+      };
+    case userConstant.FETCH_USER_FAILURE:
+      return {
+        ...state,
+        username: action.payload.username,
+        token: action.payload.token,
+      };
     case userConstant.LOADING_TRUE:
       return { ...state, loading: true };
     case userConstant.LOADING_FALSE:

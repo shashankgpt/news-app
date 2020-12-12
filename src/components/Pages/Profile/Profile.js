@@ -1,30 +1,33 @@
 import React from "react";
-import { Link } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
-import PropTypes from 'prop-types'
-import { signUpUser, clearMessage } from "../../../store/actions/user.action";
+// import PropTypes from 'prop-types'
+import { signUpUser, getUserInfo } from "../../../store/actions/user.action";
 import PageWrapper from "../../common/PageWrapper/PageWrapper";
 
-function Profile({history}) {
+function Profile() {
     const dispatch = useDispatch();
     const stateInfo = useSelector((state) => state.user);
     console.log(stateInfo);
-    const { register, handleSubmit, watch, errors } = useForm();
+    const { register, handleSubmit, setValue,watch, errors } = useForm();
     const password = React.useRef({});
     const onSubmit = (data) => {
       dispatch(signUpUser(data.username, data.password));
     };
     password.current = watch("password", "");
     console.log(errors);
-  
+
     React.useEffect(()=>{
-      if(!stateInfo.success) return ;
-      setTimeout(()=>{
-        dispatch(clearMessage())
-        history.push('/login')
-      },3000)
-    },[stateInfo.success])
+        dispatch(getUserInfo());
+      },[])
+
+      React.useEffect(()=>{
+       const keys = Object.keys(stateInfo.profile)
+        for(let i=0;i<keys.length;i+=1) {
+          setValue(keys[i], stateInfo.profile[keys[i]]);
+        }
+      },[stateInfo.profile])
+
     return (
       <PageWrapper>
         <div className="jumbotron p-3 p-md-5  rounded bg-white">
@@ -130,19 +133,14 @@ function Profile({history}) {
             <button type="submit" className="btn btn-primary">
               Submit
             </button>
-            <Link className="mx-4" to="/login">
-              Login
-            </Link>
+            <button type="submit" className="btn btn-link">
+              Logout
+            </button>
           </form>
         </div>
       </PageWrapper>
     );
   }
   
-  Profile.propTypes = {
-    history: PropTypes.shape({
-      push: PropTypes.func.isRequired
-    }).isRequired
-  };
   export default Profile;
   

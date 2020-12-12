@@ -1,4 +1,4 @@
-import { signUp, logIn } from "../../Services/http/user.service";
+import { signUp, logIn, getProfile } from "../../Services/http/user.service";
 import * as userActions from "../constant/user.constant";
 
 const loadingStart = () => {
@@ -41,6 +41,19 @@ const loginUserFailure = (data) => {
   };
 };
 
+const fetchUserSuccess = (data) => {
+  return {
+    type: userActions.FETCH_USER_SUCCESS,
+    payload: data,
+  };
+};
+
+const fetchUserFailure = (data) => {
+  return {
+    type: userActions.FETCH_USER_FAILURE,
+    payload: data,
+  };
+};
 export const clearMessage = (data) => {
   return {
     type: userActions.CLEAR_MESSAGE,
@@ -79,6 +92,22 @@ export const loginUser = (username, password) => {
       })
       .catch((err) => {
         dispatch(loginUserFailure(err));
+      })
+      .finally(() => dispatch(loadingEnd()));
+  };
+};
+
+
+export const getUserInfo = (username, password) => {
+  return (dispatch) => {
+    dispatch(loadingStart());
+    return getProfile(username, password)
+      .then((res) => {
+        console.log(res.data);
+        dispatch(fetchUserSuccess(res.data));
+      })
+      .catch((err) => {
+        dispatch(fetchUserFailure(err));
       })
       .finally(() => dispatch(loadingEnd()));
   };
