@@ -1,0 +1,34 @@
+export const PUBLICATION_NAME = 'MY NEWS';
+export const category = [{
+    key:'all',
+    value:'All'
+},
+{
+    key:'entertainment',
+    value:'Entertainment'
+},
+{
+    key:'general',
+    value:'General'
+},
+{
+    key:'health',
+    value:'Health'
+},
+{
+    key:'science',
+    value:'Science'
+},
+{
+    key:'sports',
+    value:'Sports'
+},
+{
+    key:'technology',
+    value:'Technology'
+},
+{
+    key:'business',
+    value:'Business'
+},
+];
