@@ -1,17 +1,44 @@
 import React from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { useForm } from "react-hook-form";
 import {Link} from 'react-router-dom'
+import PropTypes from 'prop-types'
+import { loginUser, clearMessage } from "../../../store/actions/user.action";
 import PageWrapper from "../../common/PageWrapper/PageWrapper";
 import "./login.css";
 
-function SignUp() {
-  const { register, handleSubmit, errors } = useForm();
-  const onSubmit = (data) => console.log(data);
+function LogIn({history}) {
+  const dispatch = useDispatch();
+  const stateInfo = useSelector((state) => state.user);
+  console.log(stateInfo);
+  const { register, handleSubmit, watch, errors } = useForm();
+  const password = React.useRef({});
+  const onSubmit = (data) => {
+    dispatch(loginUser(data.username, data.password));
+  };
+  password.current = watch("password", "");
   console.log(errors);
+  React.useEffect(()=>{
+    if(!stateInfo.success) return ;
+    setTimeout(()=>{
+      dispatch(clearMessage())
+      history.push('/')
+    },3000)
+  },[stateInfo.success])
   return (
     <PageWrapper>
          <div className="jumbotron p-3 p-md-5  rounded bg-white">
          <h1 className="display-4 font-italic">Log In</h1>
+         {stateInfo.success && (
+          <div className="alert alert-success" role="alert">
+            {stateInfo.success}
+          </div>
+        )}
+        {stateInfo.error && (
+          <div className="alert alert-danger" role="alert">
+            {stateInfo.error}
+          </div>
+        )}
       <form className="text-left form-margin" onSubmit={handleSubmit(onSubmit)}>
          
         <div className="form-group">
@@ -69,4 +96,9 @@ function SignUp() {
   );
 }
 
-export default SignUp;
+LogIn.propTypes = {
+  history: PropTypes.shape({
+    push: PropTypes.func.isRequired
+  }).isRequired
+};
+export default LogIn;
