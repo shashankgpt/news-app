@@ -48,6 +48,13 @@ export const clearMessage = (data) => {
   };
 };
 
+export const saveUserDetails = (data) => {
+  return {
+    type: userActions.SAVE_USER,
+    payload: data
+  }
+}
+
 export const signUpUser = (username, password) => {
   return (dispatch) => {
     dispatch(loadingStart());
@@ -67,6 +74,7 @@ export const loginUser = (username, password) => {
     dispatch(loadingStart());
     return logIn(username, password)
       .then((res) => {
+        console.log(res.data);
         dispatch(loginUserSuccess(res.data));
       })
       .catch((err) => {

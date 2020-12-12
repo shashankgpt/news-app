@@ -1,8 +1,25 @@
 import React from 'react'
 import {Link} from 'react-router-dom'
+import { useDispatch, useSelector } from "react-redux";
+import  * as FA from 'react-fontawesome';
+import { saveUserDetails } from '../../../store/actions/user.action';
 import {PUBLICATION_NAME} from '../../../constant/News';
 
+
 export default function Header() {
+  const stateInfo = useSelector((state) => state.user);
+  const dispatch = useDispatch();
+  React.useEffect(()=> {
+    const token = localStorage.getItem('token') 
+  const username = localStorage.getItem('username')
+  if(username && token) {
+    dispatch(saveUserDetails({
+      username,
+      token
+    }))
+  }
+  }, [])
+   
     return (
         <div className="news-header py-3">
         <div className="row flex-nowrap justify-content-between align-items-center">
@@ -34,9 +51,12 @@ export default function Header() {
                 <line x1="21" y1="21" x2="15.8" y2="15.8" />
               </svg>
             </a>
-            <Link className="btn btn-sm btn-outline-secondary" to='/signup'>
+            {!stateInfo.username && (<Link className="btn btn-sm btn-outline-secondary" to='/signup'>
               Sign up
-            </Link>
+            </Link>)}
+            {stateInfo.username && (<><FA name="rocket" /><Link className="btn btn-sm btn-outline-secondary btn-circle" to='/profile'>
+              {stateInfo.username}
+            </Link></>)}
           </div>
         </div>
       </div>

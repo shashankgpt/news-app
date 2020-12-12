@@ -20,6 +20,8 @@ function LogIn({history}) {
   console.log(errors);
   React.useEffect(()=>{
     if(!stateInfo.success) return ;
+    localStorage.setItem('token', stateInfo.token);
+    localStorage.setItem('username', stateInfo.username);
     setTimeout(()=>{
       dispatch(clearMessage())
       history.push('/')

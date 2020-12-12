@@ -7,16 +7,23 @@ const initialState = {
   error: "",
   success: "",
   profile: {},
+  token: "",
 };
 
 export default function userReducer(state = initialState, action) {
   switch (action.type) {
+    case userConstant.SAVE_USER:
+      return {
+        ...state,
+        username: action.payload.username,
+        token: action.payload.token,
+      };
     case userConstant.LOADING_TRUE:
       return { ...state, loading: true };
     case userConstant.LOADING_FALSE:
       return { ...state, loading: false };
     case userConstant.CLEAR_MESSAGE:
-      return { ...state, loading: false, error:'', success:'' };
+      return { ...state, loading: false, error: "", success: "" };
     case userConstant.USER_REGISTER_SUCCESS:
       return {
         ...state,
@@ -31,6 +38,8 @@ export default function userReducer(state = initialState, action) {
         error: "",
         isLoggedIn: true,
         success: "Successfully logIn the user",
+        token: action.payload.data.token,
+        username: action.payload.data.username,
       };
     case userConstant.USER_LOGIN_FAILURE:
       return { ...state, error: "Unable to logIn the user", success: "" };
