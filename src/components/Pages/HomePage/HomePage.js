@@ -2,7 +2,6 @@ import React from "react";
 import { useDispatch, useSelector} from 'react-redux'
 import {fetchTopHeadline} from '../../../store/actions/news.action'
 import PageWrapper from "../../common/PageWrapper/PageWrapper";
-import Header from "../../common/Header/Header";
 import MainHeading from "../../common/MainHeading/MainHeading";
 import NewsMenu from "../../common/NewsMenu/NewsMenu";
 import SubHeading from "../../common/SubHeading/SubHeading";
@@ -22,7 +21,6 @@ function HomePage() {
 
   return (
     <PageWrapper>
-      <Header />
       <NewsMenu />
       <MainHeading news={stateInfo.topHeading} />
       <SubHeading />
