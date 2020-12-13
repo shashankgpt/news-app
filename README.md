@@ -4,6 +4,8 @@ A UI that will allow to view and marks news as favourite for later read.
 It will also have user authentication system
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+## Need to add token in src/constant/News
+
 ##  How to run locally
 ### `npm install`
 It will install all dependencies
