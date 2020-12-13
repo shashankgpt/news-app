@@ -24,14 +24,7 @@ function NewsInfo({news}) {
         </div>))}
 
 
-        <nav className="blog-pagination">
-          <a className="btn btn-outline-primary" href="w">
-            Older
-          </a>
-          <a className="btn btn-outline-secondary disabled" href="w">
-            Newer
-          </a>
-        </nav>
+      
       </div>
   );
 }

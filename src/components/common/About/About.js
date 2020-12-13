@@ -8,7 +8,7 @@ function About() {
           <p className="mb-0">Etiam porta <em>sem malesuada magna</em> mollis euismod. Cras mattis consectetur purus sit amet fermentum. Aenean lacinia bibendum nulla sed consectetur.</p>
         </div>
 
-        <div className="p-3">
+        {/* <div className="p-3">
           <h4 className="font-italic">Archives</h4>
           <ol className="list-unstyled mb-0">
             <li><a href="w">March 2014</a></li>
@@ -33,7 +33,7 @@ function About() {
             <li><a href="w">Twitter</a></li>
             <li><a href="w">Facebook</a></li>
           </ol>
-        </div>
+        </div> */}
       </aside>
 
     )

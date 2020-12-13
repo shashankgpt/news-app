@@ -19,6 +19,10 @@ function HomePage() {
     dispatch(fetchTopHeadline());
   }, []);
 
+  const move = (val = 'NEXT') => {
+    dispatch(fetchTopHeadline(stateInfo.category, val === 'NEXT' ? stateInfo.page + 1 : stateInfo.page -1));
+  }
+
   return (
     <PageWrapper>
       <NewsMenu />
@@ -28,6 +32,10 @@ function HomePage() {
         <NewsInfo news={stateInfo.otherNews} />
         <About />
       </div>
+      <nav className="blog-pagination">
+         <button type="button" className={`mx-4 btn btn-outline-primary ${stateInfo.page===0 ? 'disabled': ''}`} onClick={() =>move('NEXT') }>Older</button>
+         <button type="button" className={`mx-4 btn btn-outline-primary ${stateInfo.page===0 ? '': ''}`} onClick={() =>move('NEXT') }>Newer</button>
+        </nav>
     </PageWrapper>
   );
 }
