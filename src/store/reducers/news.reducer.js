@@ -17,7 +17,8 @@ export default function newsReducer(state = initialState, action) {
       subHeadingNews: action.payload.subHeading,
       otherNews: action.payload.allOthers,
       category: action.payload.category,
-      page: action.payload.page
+      page: action.payload.page,
+      totalCount: action.payload.total
       };
     case newsConstant.FETCH_NEWS_FAILURE:
       return state;

@@ -3,7 +3,7 @@ import {getTopHeadline} from '../../Services/http/news.service'
 import * as newsActions from '../constant/news.constant';
 import {newsData } from '../../Services/util/news.util'
 
-const saveNewSuccess = (topHeading, subHeading, allOthers, category, page) => {
+const saveNewSuccess = (topHeading, subHeading, allOthers, category, page, total) => {
  return {
      type: newsActions.FETCH_NEWS_SUCCESS,
      payload: {
@@ -11,7 +11,8 @@ const saveNewSuccess = (topHeading, subHeading, allOthers, category, page) => {
          subHeading,
          allOthers,
          category,
-         page
+         page,
+         total
      }
  }   
 }
@@ -27,8 +28,9 @@ export const fetchTopHeadline = (category='all', page =0) => {
     return dispatch => {
         return getTopHeadline(category==='all' ? '': category, page)
         .then((res) => {
-            const {  mainHeading,subHeading,otherNews} = newsData(res.data)
-            dispatch(saveNewSuccess(mainHeading,subHeading,otherNews,category,page))
+            const {  mainHeading,subHeading,otherNews} = newsData(res.data);
+            console.log(res.data.totalResults)
+            dispatch(saveNewSuccess(mainHeading,subHeading,otherNews,category,page, res.data.totalResults))
         }).catch((err) => {
             dispatch(saveNewFailure(err.message))
         })

@@ -18,7 +18,7 @@ function HomePage() {
   React.useEffect(() => {
     dispatch(fetchTopHeadline());
   }, []);
-
+// TODO page set first then axios request
   const move = (val = 'NEXT') => {
     dispatch(fetchTopHeadline(stateInfo.category, val === 'NEXT' ? stateInfo.page + 1 : stateInfo.page -1));
   }
@@ -33,8 +33,8 @@ function HomePage() {
         <About />
       </div>
       <nav className="blog-pagination">
-         <button type="button" className={`mx-4 btn btn-outline-primary ${stateInfo.page===0 ? 'disabled': ''}`} onClick={() =>move('NEXT') }>Older</button>
-         <button type="button" className={`mx-4 btn btn-outline-primary ${stateInfo.page===0 ? '': ''}`} onClick={() =>move('NEXT') }>Newer</button>
+         <button type="button" disabled={stateInfo.page===0} className={`mx-4 btn btn-outline-primary ${stateInfo.page===0 ? 'disabled': ''}`} onClick={() =>move('PREV') }>Older</button>
+         <button type="button" disabled={window.Math.ceil(stateInfo.totalCount/10) <= stateInfo.page} className={`mx-4 btn btn-outline-primary ${window.Math.ceil(stateInfo.totalCount/10) <= stateInfo.page ? 'disabled': ''}`} onClick={() =>move('NEXT') }>Newer</button>
         </nav>
     </PageWrapper>
   );
