@@ -70,7 +70,7 @@ A.  Yes, it is also the fastest way of doing it but production you can simply ej
 A.  Yes, Airbnb style guide. Moreover we can have husky And/or sonarqube
 
 - Do we test setup ?
-A.  No, It will add React and enzyme for testing
+A.  Yes, "@wojtekmaj/enzyme-adapter-react-17": "^0.3.2" is not recommended adpater
 
 - Is it best application structure?
 A.  No, beacuse in big apps, there should code spliting, proper separation of concerns in the various parts of application
