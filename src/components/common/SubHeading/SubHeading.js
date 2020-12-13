@@ -21,7 +21,8 @@ function SubHeading({ category, news }) {
               <a href={val.url}>Continue reading</a>
             </div>
             <img
-              className="card-img-right flex-auto d-none d-md-block"
+              className="card-img-right flex-auto d-none d-md-block overflow-hidden"
+              style={{maxHeight: '300px'}}
               data-src="holder.js/200x250?theme=thumb"
               alt="Thumbnail [200x250]"
               src={val.urlToImage}
