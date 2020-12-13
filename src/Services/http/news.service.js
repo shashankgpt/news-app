@@ -13,7 +13,7 @@ const getParams = (category='', page=0, searchKey='', pageSize=10, country ='us'
     const urlParam = new URLSearchParams('');
     urlParam.set("country", country); 
     urlParam.set("pageSize", pageSize)
-    urlParam.set("apiKey", "a29b6151b1504b838a24c9c945e5838b")
+    urlParam.set("apiKey", "1eaf68e67f314749aed0acb293345329")
     urlParam.set('page',page);
     if(searchKey) urlParam.set('q',searchKey)
     if(category) urlParam.set('category',category) 

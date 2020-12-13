@@ -2,27 +2,25 @@ import * as newsConstant from "../constant/news.constant";
 
 const initialState = {
   totalCount:0,
-  newsData:[],
   category:'all',
-  selectedNews:{},
   topHeading:{},
+  subHeadingNews: [],
+  otherNews:[],
   page:0
 };
 
 export default function newsReducer(state = initialState, action) {
   switch (action.type) {
-    case newsConstant.ADD_FAVOURITE_NEWS:
+    case newsConstant.FETCH_NEWS_SUCCESS:
+      return {...state, 
+      topHeading: action.payload.topHeading,
+      subHeadingNews: action.payload.subHeading,
+      otherNews: action.payload.allOthers,
+      category: action.payload.category,
+      page: action.payload.page
+      };
+    case newsConstant.FETCH_NEWS_FAILURE:
       return state;
-    case newsConstant.REMOVE_FAVOURITE_NEWS:
-      return state;
-    case newsConstant.SAVE_FIRST_NEWS_PAGE: 
-    return {
-      ...state,
-      topHeading:action.payload.articles[0],
-      newsData: action.payload.articles, // TODO: data duplicacy in state
-      category:action.payload.category,
-      totalCount: action.payload.totalResults
-    }
     default:
       return state;
   }

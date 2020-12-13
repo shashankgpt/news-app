@@ -23,9 +23,9 @@ function HomePage() {
     <PageWrapper>
       <NewsMenu />
       <MainHeading news={stateInfo.topHeading} />
-      <SubHeading />
+      <SubHeading news={stateInfo.subHeadingNews} category={stateInfo.category==='all' ? 'Top': stateInfo.category} />
       <div className="row text-left">
-        <NewsInfo />
+        <NewsInfo news={stateInfo.otherNews} />
         <About />
       </div>
     </PageWrapper>
